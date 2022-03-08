@@ -31,6 +31,7 @@ const Cart = (props) => {
         <ul className={classes['cart-items']}>
             {books.map((book) => (
                 <CartItem
+                    key={book.id}
                     name={book.name}
                     price={book.price}    
                 />
