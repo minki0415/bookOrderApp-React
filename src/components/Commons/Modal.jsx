@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import classes from './Modal.module.css'
 
 const Background = (props) => {
-  return <div className={classes.background}/>
+  return <div className={classes.background} onClick={props.onClose}/>
 }
 
 const ModalWindow = (props) => {
@@ -20,7 +20,7 @@ const Modal = (props) => {
 
   return (
     <>
-    {ReactDOM.createPortal(<Background/>, portalElement)}
+    {ReactDOM.createPortal(<Background onClose={props.onClose}/>, portalElement)}
     {ReactDOM.createPortal(<ModalWindow>{props.children}</ModalWindow>, portalElement)}
     </>
   )
