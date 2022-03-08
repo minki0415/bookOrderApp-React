@@ -5,9 +5,9 @@ const CartItem = (props) => {
   return (
     <li className={classes['cart-item']}>
         <h2>{props.name}</h2>
-        <div className="summary">
-            <span className='price'>$ {props.price}</span>
-            <span className="amount">x 3 {props.amount}</span>
+        <div className={classes.summary}>
+            <span className={classes.price}>$ {props.price}</span>
+            <span className={classes.amount}>x 3 {props.amount}</span>
         </div>  
     </li>
   )
