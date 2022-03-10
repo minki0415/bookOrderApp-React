@@ -27,7 +27,7 @@ const BOOKS = [
 const Cart = (props) => {
 
     // 1. Context 적용 전
-    const [books, setBooks] = useState(BOOKS);
+    // const [books, setBooks] = useState(BOOKS);
 
     // 2. Context 적용 후
     const cartContext = useContext(CartContext);
@@ -45,13 +45,16 @@ const Cart = (props) => {
             ))}
         </ul>
     );
+    
+    const totalAmount = `$${cartContext.totalAmount}`
 
     const cartItemsTotal = (
         <div className={classes.total}>
             <span>Total Amount</span>    
-            <span>{55.24}</span>
+            <span>{totalAmount}</span>
         </div>
     );
+
 
     const modalButton = (
         <div className={classes.buttons}>

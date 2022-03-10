@@ -41,7 +41,9 @@ const CartProvider = (props) => {
             updatedItems = cartState.items.concat(item);
         }
 
-        setCartState({items:updatedItems});
+        const updatedTotalAmount = cartState.totalAmount + item.price * item.amount;
+
+        setCartState({items:updatedItems, totalAmount:updatedTotalAmount});
     };
 
 
