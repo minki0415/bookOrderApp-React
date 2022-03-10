@@ -3,6 +3,11 @@ import classes from './Book.module.css'
 import AddBookForm from './AddBookForm'
 
 const Book = (props) => {
+  const addItemToCartHandler = (amount) => {
+    // console.log('addItemToCartHandler');
+    console.log(amount);
+  }
+
   return (
     <li className={classes.book}>
       <div className={classes.book__info}>
@@ -10,7 +15,7 @@ const Book = (props) => {
         <div className={classes.description}>{props.description}</div>
         <div className={classes.price}>${props.price}</div>
       </div>
-      <AddBookForm/>
+      <AddBookForm onAddToCart={addItemToCartHandler}/>
     </li>
   )
 }
