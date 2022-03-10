@@ -11,16 +11,37 @@ const CartProvider = (props) => {
 
     const addItemToCartHandler = (item) => {
         // console.log('addItemToCartHandler called');
-        console.log(item);
+        // console.log(item);
 
         // 1. 기본으로 add할 경우, 
         // 기존에 cart에 등록된 items에 방금 새로 전달된 item 추가.
-        const updatedItem = [
-            ...cartState.items,
-            item
-        ];
+        // const updatedItem = [
+        //     ...cartState.items,
+        //     item
+        // ];
+        // setCartState({items:updatedItem});
 
-        setCartState({items:updatedItem});
+        // 2. Add를 1개씩 여러 번 추가했을 때 cart에 각각 listing되지 않고, 중복된 수량으로 통합 연산되도록
+        // 이미 동일한 id값의 book이 cart에 존재할 경우, 해당 book의 amount만 추가.
+        const existingCartItemIndex = cartState.items.findIndex(
+            (cartItem) => cartItem.id === item.id
+        );
+
+        const existingCartItem = cartState.items[existingCartItemIndex];
+
+        let updatedItems;
+        if(existingCartItem) { // 방금 새로 등록한 book(item)이 cart에 이미 존재할 때
+            const updatedItem = {
+                ...existingCartItem,
+                amount:existingCartItem.amount + item.amount,
+            };
+            updatedItems = [...cartState.items];
+            updatedItems[existingCartItemIndex] = updatedItem
+        }else{ // 방금 새로 등록한 book(item)이 cart에 존재하지 않을 때
+            updatedItems = cartState.items.concat(item);
+        }
+
+        setCartState({items:updatedItems});
     };
 
 
