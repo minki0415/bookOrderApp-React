@@ -40,7 +40,7 @@ const BOOKS = [
 
 const BooksList = () => {
 
-    const [books, setBooks] = useState(BOOKS)
+    const [books, setBooks] = useState([])
 
     // 1. Dummy Books 확인용
     // const booksList = books.map(book => 
@@ -67,12 +67,25 @@ const BooksList = () => {
     // 3. firebase를 활용하여 DUMMY Data get
     useEffect(() => {
       const fetchBooks = async () => {
-        const response = await fetch('https://react-book-order-68ae9-default-rtdb.firebaseio.com/books.json');
+        const response = await fetch('https://react-book-order-1da17-default-rtdb.firebaseio.com/books.json');
 
         console.log(response.ok);
 
         const responseData = await response.json();
         console.log(responseData);
+
+        const booksData = [];
+        for (const key in responseData) {
+          booksData.push({
+            id: key,
+            name: responseData[key].name,
+            description: responseData[key].description,
+            author: responseData[key].author,
+            price: responseData[key].price,
+          });
+        }
+        console.log(booksData);
+        setBooks(booksData);
       };
 
       fetchBooks().catch(error => console.log(error));
